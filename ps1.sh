@@ -17,9 +17,13 @@ BKRED=$(tput setab 1)
 
 RESETALL=$(tput sgr0)
 
-#If root bkgrnd user with red
-if [ "$(id -u)" = "0" ]; then
+if [[ `hostname` = *"svr"* ]] && [ "$(id -u)" = "0" ];then
+  export PS1='\[$GREEN\][\[$BKRED\]\[$WHITE\]\u\[$RESETALL\]\[$GREEN\]@\[$WHITE\]\[$BKRED\]\h\[$RESETALL\]\[$GREEN\]:\[$YELLOW\]\W\[$GREEN\]]\[$PINK\]\$ \[$RESETALL\]'
+elif [ "$(id -u)" = "0" ]; then
   export PS1='\[$GREEN\][\[$BKRED\]\[$WHITE\]\u\[$RESETALL\]\[$GREEN\]@\[$CYAN\]\h\[$GREEN\]:\[$YELLOW\]\W\[$GREEN\]]\[$PINK\]\$ \[$RESETALL\]'
+elif [[ `hostname` = *"svr"* ]];then
+  export PS1='\[$GREEN\][\[$PINK\]\u\[$GREEN\]@\[$WHITE\]\[$BKRED\]\h\[$RESETALL\]\[$GREEN\]:\[$YELLOW\]\W\[$GREEN\]]\[$PINK\]\$ \[$RESETALL\]'
 else
   export PS1='\[$GREEN\][\[$PINK\]\u\[$GREEN\]@\[$CYAN\]\h\[$GREEN\]:\[$YELLOW\]\W\[$GREEN\]]\[$PINK\]\$ \[$RESETALL\]'
 fi
+
